@@ -6,7 +6,7 @@ export class LogParser implements ILogParser {
 
   getLogs(logs: string): Log[] {
     const parsedLogs = [];
-    const logLines = logs.split('\n');
+    const logLines = logs.split('\n').filter(i => i);
     for (const logLine of logLines) {
       parsedLogs.push(this.parse(logLine));
     }

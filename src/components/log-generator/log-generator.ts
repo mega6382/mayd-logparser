@@ -4,20 +4,20 @@ export class LogGenerator {
   constructor() { }
 
   getLogs(logs: Log[]): string {
-    let generatedLogs = "";
+    let generatedLogs = [];
     for (const log of logs) {
-      generatedLogs += `${this.generateLog(log)}\n`;
+      generatedLogs.push(this.generateLog(log));
     }
 
-    return generatedLogs;
+    return JSON.stringify(generatedLogs);
   }
 
-  private generateLog(log: Log): string {
-    const logData = {
+  private generateLog(log: Log): Record<string, string|undefined> {
+    return {
+      timestamp: log.logDate.toISOString(),
+      loglevel: log.logLevel,
       transactionId: log.transactionId,
-      details: log.details,
       err: log.err
     };
-    return `${log.logDate.toISOString()} - ${log.logLevel} - ${JSON.stringify(logData)}`;
   }
 }
