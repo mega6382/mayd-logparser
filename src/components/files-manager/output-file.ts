@@ -1,9 +1,13 @@
 import fs from 'fs';
 
-export class OutputFile {
-    private stream: fs.WriteStream;
-    constructor (filePath: string) {
-        this.stream = fs.createWriteStream(filePath);
-    }
+export class OutputFile implements IOutputFile {
+  private stream: fs.WriteStream;
+  constructor(filePath: string) {
+    this.stream = fs.createWriteStream(filePath);
+  }
+  writeFile(data: string): void {
+    this.stream.write(data);
+    this.stream.destroy();
+  }
 
 }
